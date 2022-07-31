@@ -22,7 +22,7 @@
                         <a class="nav-link" href="{{route('about-us')}}">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
+                        <a class="nav-link" href="{{route('contact-us')}}">Contact-Us</a>
                     </li>
                 </ul>
             </div>
@@ -36,18 +36,35 @@
                     </div>
                 </div>
                 @auth
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <a class="nav-icon position-relative text-decoration-none" href="{{route('cart' , \Illuminate\Support\Facades\Auth::user()->id)}}">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+                        @if(\Illuminate\Support\Facades\Auth::user()->products->count() > 0)
+                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">{{\Illuminate\Support\Facades\Auth::user()->products->count()}}</span>
+                        @endif
+
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
-                    </a>
+                    <div class="dropdown">
+                        <button class="nav-icon position-relative text-decoration-none dropbtn" href="{{route('myProfile' , \Illuminate\Support\Facades\Auth::user()->id)}}">
+                            <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                            <div class="dropdown-content">
+                                @if(Auth::user()->admin)
+                                    <a href="{{route('admin.add-category')}}">Add Category</a>
+                                    <a href="{{route('admin.add-product')}}">Add Product</a>
+                                @endif
+                                <a href="{{route('myProfile' , Auth::user()->id)}}">My Profile</a>
+                                <a href="{{route('admin.logout')}}">Log out</a>
+                            </div>
+                        </button>
+                    </div>
                 @endauth
                 @guest
-                    <a href="{{route('auth.login')}}" style="margin: 30px;color: blue">Login</a>
-                    <a href="{{route('auth.register')}}" style="color: blue">Sigin up</a>
+                    <div class="dropdown">
+                        <button class="dropbtn" style="background-color: #3e8e41">Join us</button>
+                        <div class="dropdown-content">
+                            <a href="{{route('auth.login')}}">log in</a>
+                            <a href="{{route('auth.register')}}">sign up</a>
+                        </div>
+                    </div>
                 @endguest
             </div>
         </div>

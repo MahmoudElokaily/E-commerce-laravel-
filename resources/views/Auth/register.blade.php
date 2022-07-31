@@ -1,47 +1,46 @@
 @extends('index')
 @section('content')
-    <form action="{{route('auth.store')}}" method="post">
-        @csrf
-        @isset($success)
-            <div class="alert alert-success">
-                @if (Session::has('success'))
-                    {{Session::get('success')}}
-                @endif
+
+    <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    @if (Session::has('success'))
+                        <div class="alert alert-success">
+                            {{Session::get('success')}}
+                        </div>
+                    @endif
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Register</h4>
+                    </div>
+                    <form method="post" action="{{route('auth.store')}}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row mt-3">
+
+                            <div class="col-md-12"><label class="labels">Name :</label><input type="text" name="name" class="form-control" placeholder="Enter your name"></div>
+                            @error('name') <small class="form-text text-danger">{{$message}}</small> @enderror
+
+
+                            <div class="col-md-12"><label class="labels">Email :</label><input type="text" name="email" class="form-control" placeholder="Enter your email"></div>
+                            @error('email') <small class="form-text text-danger">{{$message}}</small> @enderror
+
+                            <div class="col-md-12"><label class="labels">Password :</label><input type="password" name="password" class="form-control" placeholder="Enter your password"></div>
+                            @error('password') <small class="form-text text-danger">{{$message}}</small> @enderror
+
+                            <div class="col-md-12"><label class="labels">Confirm password :</label><input type="password" placeholder="Confirm Password" name="password_confirmation" class="form-control"></div>
+
+
+                        </div>
+                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Register</button></div>
+                        <div class="container signin">
+                            <p>Already have an account? <a href="{{route('auth.login')}}">Sign in</a>.</p>
+                        </div>
+                    </form>
+                </div>
             </div>
-        @endisset
-        <div class="container">
-            <h1>Register</h1>
-            <p>Please fill in this form to create an account.</p>
-            <hr>
-
-            <label for="name"><b>Name : </b></label>
-            <input id="name" type="text" placeholder="Enter your name" name="name" id="name">
-            <br>
-
-            <label for="email"><b>Email : </b></label>
-            <input id="email" type="text" placeholder="Enter your Email" name="email">
-            <br>
-
-            <label for="psw"><b>Password : </b></label>
-            <input id="psw" type="password" placeholder="Enter Password" name="password">
-            <br>
-
-            <label for="psw-repeat"><b>Confirm Password : </b></label>
-            <input id="psw-repeat" type="password" placeholder="Confirm Password" name="password_confirmation">
-            @isset($error)
-            <div class="alert alert-danger">
-                @if (Session::has('error'))
-                    {{Session::get('error')}}
-                @endif
-            </div>
-            @endisset
-            <br>
-            <hr>
-            <button type="submit" class="registerbtn">Register</button>
         </div>
+    </div>
+    </div>
+    </div>
 
-        <div class="container signin">
-            <p>Already have an account? <a href="{{route('auth.login')}}">Sign in</a>.</p>
-        </div>
-    </form>
 @endsection

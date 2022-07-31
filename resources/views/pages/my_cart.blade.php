@@ -10,17 +10,16 @@
             </div>
         </div>
         <div class="row">
-            @if(isset($products))
+            @isset($products)
                 @foreach($products as $product)
                     <div class="col-12 col-md-4 p-5 mt-3">
                         <a href="#"><img src="{{asset('images/products/'.$product->image)}}" class="rounded-circle img-fluid border"></a>
                         <h5 class="text-center mt-3 mb-3">{{$product->name}}</h5>
                         <p>{{$product->description}}</p>
-                        <p class="text-center"><a class="btn btn-success">Buy it Now</a></p>
-                        <p class="text-center"><a class="btn btn-success">Add to cart</a></p>
+                        <p class="text-center"><a href="{{route('product.checkout' , $product->id)}}" class="btn btn-success">Buy it Now</a></p>
                     </div>
                 @endforeach
-            @endif
+            @endisset
         </div>
     </section>
 @endsection

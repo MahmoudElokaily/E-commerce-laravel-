@@ -2,38 +2,51 @@
 @section('title' , 'add product')
 @section('content')
 
+@if(Session::has('success'))
+    <div class="alert alert-success" role="alert">
+        {{ Session::get('success') }}
+    </div>
+@endif
 
-<h3>Add New Product</h3>
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Add New Product</h4>
+                </div>
+                <form method="post" action="{{route('admin.storeProduct')}}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row mt-3">
 
-<div>
-    <form action="{{route('admin.storeProduct')}}" method="post" enctype="multipart/form-data">
-        @csrf
-        <label for="nameP">Name of product</label>
-        <input type="text" id="nameP" name="name" placeholder="Name of product..">
-        <br>
+                        <div class="col-md-12"><label class="labels">Name of product :</label><input type="text" name="name" class="form-control" placeholder="Name of product"></div>
+                        @error('name') <small class="form-text text-danger">{{$message}}</small> @enderror
 
-        <label for="des">Description</label>
-        <input type="text" id="des" name="des" placeholder="Your Description..">
-        <br>
+                        <div class="col-md-12"><label class="labels">Description :</label><input type="text" name="description" class="form-control"></div>
+                        @error('description') <small class="form-text text-danger">{{$message}}</small> @enderror
 
-        <label for="price">Price</label>
-        <input type="text" id="price" name="price" placeholder="Your Price..">
-        <br>
+                        <div class="col-md-12"><label class="labels">Price :</label><input type="text" name="price" class="form-control"></div>
+                        @error('price') <small class="form-text text-danger">{{$message}}</small> @enderror
 
-        <label for="image">Image</label>
-        <input type="file" id="image" name="image">
-        <br>
+                        <div class="col-md-12"><label class="labels">Image :</label><input type="file" name="image" class="form-control"></div>
+                        @error('image') <small class="form-text text-danger">{{$message}}</small> @enderror
 
-
-        <label for="category">Category</label>
-        <select id="category" name="category">
-            @foreach($categories as $category)
-                <option value="{{$category->id}}">{{$category->name}}</option>
-            @endforeach
-        </select>
-        <br>
-        <input type="submit" value="Submit">
-    </form>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">Category</label>
+                            <select id="category" name="category">
+                                @foreach($categories as $category)
+                                    <div class="col-md-6"> <option value="{{$category->id}}">{{$category->name}}</option> </div>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Product</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-
+</div>
+</div>
 @endsection

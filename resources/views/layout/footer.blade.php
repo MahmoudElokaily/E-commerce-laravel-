@@ -37,9 +37,9 @@
                 <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
                 <ul class="list-unstyled text-light footer-link-list">
                     <li><a class="text-decoration-none" href="{{route('home')}}">Home</a></li>
-                    <li><a class="{{route('about-us')}}" href="#">About Us</a></li>
-                    <li><a class="text-decoration-none" href="#">FAQs</a></li>
-                    <li><a class="text-decoration-none" href="#">Contact</a></li>
+                    <li><a class="text-decoration-none" href="{{route('about-us')}}">About Us</a></li>
+                    <li><a class="text-decoration-none" href="{{route('allCategories')}}">Categories</a></li>
+                    <li><a class="text-decoration-none" href="{{route('contact-us')}}">Contact</a></li>
                 </ul>
             </div>
 

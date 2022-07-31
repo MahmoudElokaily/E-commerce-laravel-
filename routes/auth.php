@@ -16,6 +16,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Auth'] , function () {
     Route::post('send-password-mail' , 'AuthController@sendPasswordMail')->name('auth.send_password_mail');
     Route::get('reset-password/{id}' , 'AuthController@resetPassword')->name('auth.reset_password');
     Route::post('rest-password-done' , 'AuthController@updatePassword')->name('auth.update_password');
+    Route::get('log-out' , 'App\Http\Controllers\Auth\AuthController@logout')->name('admin.logout');
+
 });
 
 

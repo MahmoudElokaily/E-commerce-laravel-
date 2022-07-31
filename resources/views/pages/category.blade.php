@@ -17,15 +17,17 @@
                     <h5 class="text-center mt-3 mb-3">{{$product->name}}</h5>
                     <p>{{$product->description}}</p>
                      @if(\Illuminate\Support\Facades\Auth::user())
-                        <p class="text-center"><a class="btn btn-success">Buy it Now</a></p>
-                        <p class="text-center"><a href="" class="btn btn-success">Add to cart</a></p>
+                        <p class="text-center"><a href="{{route('product.checkout' , $product->id)}}" class="btn btn-success">Buy it Now</a></p>
+                        <p class="text-center"><a href="{{route('addToMyCart' , $product->id)}}" class="btn btn-success">Add to cart</a></p>
                      @else
-                            <p class="text-center"><a class="btn btn-success">Buy it Now</a></p>
+                            <p class="text-center"><a id="checkout-button" class="btn btn-success">Buy it Now</a></p>
                     @endif
                     </div>
                 @endforeach
             @endif
         </div>
     </section>
+
 <!-- End Category -->
+
 @endsection

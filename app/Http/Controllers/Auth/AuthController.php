@@ -27,7 +27,7 @@ class AuthController extends Controller
             return redirect()->route('home');
         }
         else {
-            return redirect()->back()->withErrors('oops , username or password is wrong');
+            return redirect()->back()->with('error' , 'oops , username or password is wrong');
         }
     }
 
@@ -94,5 +94,10 @@ class AuthController extends Controller
            'password' => Hash::make($request->password1),
        ]);
        dd('Password change Successfully');
+   }
+
+   public function logout(){
+        Auth::logout();
+        return redirect()->route('home');
    }
 }
